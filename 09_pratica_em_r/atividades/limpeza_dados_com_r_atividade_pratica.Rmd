@@ -82,7 +82,7 @@ Não existem valores faltantes nem ajustes necessários para a coluna Jogar.
 
 
 
-### Tratamento de dados
+## Tratamento de dados
 
 * Aparência
 
@@ -165,7 +165,7 @@ summary(dados$Vento)
 barplot(table(dados$Vento), main="Vento", ylab="Frequência")
 ```
 
-#### Resultado final
+## Resultado final
 
 ```{r}
 summary(dados)
