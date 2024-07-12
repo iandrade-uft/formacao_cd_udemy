@@ -1,7 +1,7 @@
 
 # Minhas atividades do curso: Formação  Cientista de Dados (UDEMY)
 
-(https://www.udemy.com/course/cientista-de-dados)[https://www.udemy.com/course/cientista-de-dados]
+(!https://www.udemy.com/course/cientista-de-dados)[https://www.udemy.com/course/cientista-de-dados]
 
 Conteúdo do curso:
 
