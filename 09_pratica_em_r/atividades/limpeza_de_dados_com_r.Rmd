@@ -135,3 +135,40 @@ dados[dados$Idade < 0 | dados$Idade > 110, ]
 summary(dados$Idade)
 ```
 
+#### Tratamento de dados duplicados
+
+```{r}
+x = dados[duplicated(dados$Id),]
+x
+
+dados = dados[!rownames(dados) %in% c(rownames(x)),]
+dados[dados$Id == x$Id, ]
+x = dados[duplicated(dados$Id), ]
+x
+```
+
+
+#### Estados fora do domínio
+
+```{r}
+unique(dados$Estado)
+summary(dados$Estado)
+dados[!dados$Estado %in% c("RS", "SC", "PR"),]$Estado = "RS"
+dados$Estado = factor(dados$Estado)
+summary(dados$Estado)
+```
+
+
+#### Outliers
+
+```{r}
+desv = sd(dados$Salario, na.rm = TRUE)
+dados[dados$Salario >= 2 * desv, ]$Salario
+x = boxplot(dados$Salario)$out
+x
+
+dados[dados$Salario >= 2*desv, ]$Salario = median(dados$Salario, na.rm=TRUE)
+x = boxplot(dados$Salario)$out
+x
+```
+

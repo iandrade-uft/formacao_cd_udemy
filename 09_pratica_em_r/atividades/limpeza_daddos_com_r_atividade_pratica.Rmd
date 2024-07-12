@@ -1,0 +1,62 @@
+---
+title: "Limpeza de Dados em R - Atividade Prática"
+author: "Igo da Costa Andrade"
+date: "2024-07-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problema
+
+![](atividade.png)
+
+## Carregamento e Visualização dos dados
+
+```{r}
+dados = read.csv("../dados/tempo.csv", sep=";", na.strings = "", stringsAsFactors = TRUE)
+head(dados)
+# Resumo Estatístico
+summary(dados)
+```
+
+
+## Análise Exploratória de Dados (EDA)
+
+* Aparência
+
+```{r}
+table(dados$Aparencia)
+barplot(table(dados$Aparencia), main="Aparência")
+```
+
+
+### Tratamento de dados
+
+* Aparência
+
+```{r}
+# Tabela de frequências
+freq_table = table(dados$Aparencia)
+# Índice da tabela com maior frequência
+max_idx = which.max(freq_table)
+# Nome correspondente ao índice de maior frequência
+max_value_name = names(freq_table)[max_idx]
+max_value_name
+```
+
+
+```{r}
+# Valores de domínio para a coluna Aparencia
+dominio = c("sol", "nublado", "chuva")
+# Substituição dos valores fora de domínio
+dados[!dados$Aparencia %in% dominio, ]$Aparencia = max_value_name
+# Ajuste 
+dados$Aparencia = factor(dados$Aparencia)
+# Resultado
+barplot(table(dados$Aparencia), main="Aparência")
+
+```
+
