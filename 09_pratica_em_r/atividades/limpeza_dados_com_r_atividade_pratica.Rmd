@@ -61,6 +61,12 @@ Umin = 0
 Umax = 100
 ```
 
+* Vento
+
+```{r}
+summary(dados$Vento)
+barplot(table(dados$Vento), main="Vento", ylab="Frequência")
+```
 
 
 
@@ -124,3 +130,26 @@ dados[dados$Umidade < Umin | dados$Umidade > Umax | is.na(dados$Umidade), ]$Umid
 summary(dados$Umidade)
 boxplot(dados$Umidade)
 ```
+
+
+* Vento
+
+Há `r nrow(dados[is.na(dados$Vento), ])` valor faltante na coluna de Vento. Vamos substituí-lo pelo valor mais frequente dessa coluna.
+
+```{r}
+# Tabela de frequências
+freq_table <- table(dados$Vento)
+# Índice mais frequente
+idx_max <- which.max(freq_table)
+# Valor do índice mais frequente
+idx_max_value <- names(freq_table)[idx_max]
+idx_max_value
+
+# Substituição do valor faltante pelo valor mais frequente
+dados[is.na(dados$Vento), ]$Vento = idx_max_value
+# Resultado
+summary(dados$Vento)
+# Barplot
+barplot(table(dados$Vento), main="Vento", ylab="Frequência")
+```
+
