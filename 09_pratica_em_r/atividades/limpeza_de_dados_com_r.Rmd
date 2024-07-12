@@ -123,3 +123,15 @@ summary(dados$Genero)
 ```
 
 
+#### Idades fora do domínio
+
+Substituição das idades fora de domínio pela mediada da idades
+
+```{r}
+summary(dados$Idade)
+dados[dados$Idade < 0 | dados$Idade > 110, ]
+dados[dados$Idade < 0 | dados$Idade > 110, ]$Idade = median(dados$Idade)
+dados[dados$Idade < 0 | dados$Idade > 110, ]
+summary(dados$Idade)
+```
+

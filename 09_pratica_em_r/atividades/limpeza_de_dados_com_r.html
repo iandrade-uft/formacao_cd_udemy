@@ -550,6 +550,31 @@ summary(dados$Genero)</code></pre>
 <pre><code>##  Feminino Masculino 
 ##       464       535</code></pre>
 </div>
+<div id="idades-fora-do-domínio" class="section level4">
+<h4>Idades fora do domínio</h4>
+<p>Substituição das idades fora de domínio pela mediada da idades</p>
+<pre class="r"><code>summary(dados$Idade)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   -20.0    32.0    37.0    38.9    44.0   140.0</code></pre>
+<pre class="r"><code>dados[dados$Idade &lt; 0 | dados$Idade &gt; 110, ]</code></pre>
+<pre><code>##      Id Score Estado    Genero Idade Patrimonio    Saldo Produtos
+## 868 869   636     RS  Feminino   -10          1 17083346        1
+## 985 986   773     RS Masculino   -20          1 12453278        2
+## 991 992   655     RS Masculino   140          5    93147        2
+##     TemCartCredito Ativo  Salario Saiu
+## 868              1     0 11051028    1
+## 985              0     1  1172357    0
+## 991              1     0  6621413    0</code></pre>
+<pre class="r"><code>dados[dados$Idade &lt; 0 | dados$Idade &gt; 110, ]$Idade = median(dados$Idade)
+dados[dados$Idade &lt; 0 | dados$Idade &gt; 110, ]</code></pre>
+<pre><code>##  [1] Id             Score          Estado         Genero         Idade         
+##  [6] Patrimonio     Saldo          Produtos       TemCartCredito Ativo         
+## [11] Salario        Saiu          
+## &lt;0 linhas&gt; (ou row.names de comprimento 0)</code></pre>
+<pre class="r"><code>summary(dados$Idade)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     0.0    32.0    37.0    38.9    44.0    82.0</code></pre>
+</div>
 </div>
 </div>
 
