@@ -1,0 +1,125 @@
+---
+title: "Limpeza de Dados com R"
+author: "Igo da Costa Andrade"
+date: "2024-07-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Limpeza de Dados
+
+### Carregamento e visualização dos dados
+
+```{r}
+# Carregamento dos dados
+dados = read.csv("../dados/Churn.csv", sep=";", na.strings="", stringsAsFactors = TRUE)
+# Visualização dos dados
+head(dados)
+```
+
+
+# Resumo estatístico dos dados
+```{r}
+summary(dados)
+```
+
+* Renomear nomes das colunas
+
+
+```{r}
+colnames(dados) = c(
+  "Id", "Score", "Estado", "Genero", "Idade", "Patrimonio", "Saldo", "Produtos", "TemCartCredito", "Ativo", "Salario", "Saiu"
+)
+head(dados)
+```
+
+### Análise Exploratória de Dados (EDA)
+
+#### Dados Categóricos
+
+* Estados
+
+```{r}
+counts = table(dados$Estado)
+barplot(counts, main="Quantidade de Clientes por Estado", xlab="Estado", ylab="Quantidade")
+```
+
+* Gênero
+
+```{r}
+counts = table(dados$Genero)
+barplot(counts, main="Quantidade de Clientes por Gênero", xlab="Gênero", ylab="Quantidade")
+```
+
+#### Dados Numéricos
+
+* Score
+
+```{r}
+summary(dados$Score)
+boxplot(dados$Score, main="Score")
+hist(dados$Score, main="Distribuição do Score dos clientes", xlab="Score", ylab="Frequência")
+```
+
+* Idade
+
+```{r}
+summary(dados$Idade)
+boxplot(dados$Idade, main="Idade")
+hist(dados$Idade, main="Distribuição das idades dos clientes", xlab="Idade", ylab="Frequência")
+```
+
+
+* Saldo
+
+```{r}
+summary(dados$Saldo)
+boxplot(dados$Saldo, main="Saldo")
+hist(dados$Saldo, main="Distribuição dos saldos dos clientes", xlab="Saldo", ylab="Frequência")
+```
+
+* Salário
+
+```{r}
+summary(dados$Salario)
+boxplot(dados$Salario, main="Salário")
+hist(dados$Salario, main="Distribuição dos Salários dos clientes", xlab="Salário", ylab="Frequência")
+```
+
+
+### Tratamento dos dados
+
+#### Valores Faltantes - NAs
+
+Filtragem dos valores faltantes no conjunto de dados:
+
+```{r}
+dados[!complete.cases(dados),]
+```
+
+
+A tabela acima mostra que aomente as colunas de Gênero e Salário possuem valores faltantes. 
+
+Para a coluna Salários, façamos:
+
+```{r}
+summary(dados$Salario)
+dados[is.na(dados$Salario),]$Salario = median(dados$Salario, na.rm=TRUE)
+dados[!complete.cases(dados$Salario),]
+```
+Para a coluna Gênero, façamos:
+
+```{r}
+unique(dados$Genero)
+summary(dados$Genero)
+dados[is.na(dados$Genero) | dados$Genero=="M", ]$Genero = "Masculino"
+dados[dados$Genero=="F"  | dados$Genero == "Fem", ]$Genero = "Feminino"
+summary(dados$Genero)
+dados$Genero = factor(dados$Genero)
+summary(dados$Genero)
+```
+
+
