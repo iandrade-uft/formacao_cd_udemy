@@ -2,7 +2,9 @@
 title: "Limpeza de Dados em R - Atividade Prática"
 author: "Igo da Costa Andrade"
 date: "2024-07-12"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
