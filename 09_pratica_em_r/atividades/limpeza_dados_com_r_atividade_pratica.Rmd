@@ -69,6 +69,16 @@ barplot(table(dados$Vento), main="Vento", ylab="Frequência")
 ```
 
 
+* Jogar
+
+```{r}
+summary(dados$Jogar)
+barplot(table(dados$Jogar), main="Jogar", ylab="Frequência")
+```
+
+Não existem valores faltantes nem ajustes necessários para a coluna Jogar.
+
+
 
 ### Tratamento de dados
 
@@ -151,5 +161,11 @@ dados[is.na(dados$Vento), ]$Vento = idx_max_value
 summary(dados$Vento)
 # Barplot
 barplot(table(dados$Vento), main="Vento", ylab="Frequência")
+```
+
+#### Resultado final
+
+```{r}
+summary(dados)
 ```
 
