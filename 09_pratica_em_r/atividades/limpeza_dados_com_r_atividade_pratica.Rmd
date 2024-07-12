@@ -49,6 +49,19 @@ hist(dados$Temperatura, main="Distribuição de dados de temperatura", xlab="Tem
 ```
 
 
+* Umidade
+
+```{r}
+# Resumo Estatístico
+summary(dados$Umidade)
+# Boxplot
+boxplot(dados$Umidade, ylab="Umidade")
+# Domínio
+Umin = 0
+Umax = 100
+```
+
+
 
 
 ### Tratamento de dados
@@ -104,4 +117,10 @@ hist(dados$Temperatura, main="Distribuição de dados de Temperatura", xlab="Tem
 ```
 
 
+* Umidade
 
+```{r}
+dados[dados$Umidade < Umin | dados$Umidade > Umax | is.na(dados$Umidade), ]$Umidade = median(dados$Umidade, na.rm = TRUE)
+summary(dados$Umidade)
+boxplot(dados$Umidade)
+```
